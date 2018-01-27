@@ -6,13 +6,7 @@ public class PickMeUp : MonoBehaviour {
     private Vector3 screenPoint;
     private Vector3 offset;
     public Collider2D plugCollider;
-    GameObject dragging;
-
-    private void Start()
-    {
-        dragging = gameObject;
-    }
-
+    public bool overPlug;
     void OnMouseDown()
     {
         screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
@@ -32,9 +26,24 @@ public class PickMeUp : MonoBehaviour {
 
     private void OnMouseUp()
     {
-        if (dragging.GetComponent<Collider2D>().IsTouching(plugCollider))
-                {
-            
+        if (overPlug == true)
+        {
+            transform.position = plugCollider.transform.position;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Plug"))
+        {
+            plugCollider = collision;
+            overPlug = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Plug"))
+        {
+            overPlug = false;
         }
     }
 }
