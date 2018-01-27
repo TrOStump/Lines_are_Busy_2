@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PhoneScript : MonoBehaviour {
 
+    public Text dialogue;
     GameObject phone;
     GameObject mainCam;
 
@@ -18,17 +20,17 @@ public class PhoneScript : MonoBehaviour {
 	}
     private void OnMouseDown()
     {
+        
         if (!pickedUp)
         {
-            //ANIMATE PHONE PICKUP HERE
-            pickedUp = true;
+            mainCam.GetComponent<GameStuff>().phoneUp();//ANIMATE PHONE PICKUP HERE
         }
         else if(pickedUp)
         {
             //ANIMATE PHONE DROP HERE
-            mainCam.GetComponent<GameStuff>().finishedCall = true;
-            pickedUp = false;
+            mainCam.GetComponent<GameStuff>().StopAllCoroutines();//ANIMATE PHONE PICKUP HERE
+            dialogue.text = ("");
         }
-
+        pickedUp = !pickedUp;
     }
 }

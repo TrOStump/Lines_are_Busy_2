@@ -12,26 +12,15 @@ public class PickMeUp : MonoBehaviour {
     /*PLUG CHOICE ASPECT*/
     public GameObject phone;
     public GameObject mainCam;
-    private int randPlug;
-    public int[] plugOrder;
     /********************/
 
     private void Start()
     {
         mainCam = GameObject.Find("Main Camera");
-        plugOrder = new int[mainCam.GetComponent<GameStuff>().PhoneText.Length];
-
-        for (int i = 0; i < mainCam.GetComponent<GameStuff>().PhoneText.Length; i++) {
-            randPlug = (int)(Random.value * 11f) + 1;
-            plugOrder[i] = randPlug;
-        }
+        //plugOrder = new int[mainCam.GetComponent<GameStuff>().PhoneText.Length];
     }
     private void Update()
     {
-        if (overPlug && !Input.GetMouseButton(1))
-        {
-            
-        }
     }
     void OnMouseDown()
     {
@@ -55,7 +44,7 @@ public class PickMeUp : MonoBehaviour {
         if (overPlug == true)
         {
             transform.position = plugCollider.transform.position;
-            if (plugOrder[(int)(mainCam.GetComponent<GameStuff>().currentCall)] == plugCollider.GetComponent<Number>().Num)
+            if ((mainCam.GetComponent<GameStuff>().randPlug + 1) == plugCollider.GetComponent<Number>().Num)
             {
                 Debug.Log("WUSSUP HOMIE");
             }

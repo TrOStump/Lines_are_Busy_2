@@ -4,21 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameStuff : MonoBehaviour {
-    private int i;
+    public int i;
     private int j;
     public GameObject button;
     public GameObject phone;
     public Text dialogue;
     public string[] OpeningText;
     public string[] PhoneText;
+    public string[] PhoneNumbers;
     public int currentCall;
+    public int randPlug;
 
     /*TIME MECHANICS*/
     public float shiftLength;      //3 minutes of gameplay
     public float phoneTimer;       //New phonecall every 15 seconds (12 calls in first shift)
-    private float timer = 0f;
-    private int callNumber = 0;
-    public bool finishedCall = true;
+    public float timer = 0f;
+    public int callNumber = 0;
     /****************/
 
         
@@ -46,8 +47,7 @@ public class GameStuff : MonoBehaviour {
         //Note that the speed you want the typewriter effect to be going at is the yield waitforseconds (in my case it's 1 letter for every      0.03 seconds, replace this with a public float if you want to experiment with speed in from the editor)
         IEnumerator AnimateText(string[] textArray, int call)
         {
-
-            for (i = 0; i < (textArray[call].Length + 1); i++)
+            for (i = 0; i <= (textArray[call].Length); i++)
             {
                 dialogue.text = textArray[call].Substring(0, i);
                 yield return new WaitForSeconds(.03f);
@@ -71,19 +71,7 @@ public class GameStuff : MonoBehaviour {
 
         timer += Time.deltaTime;
         if (timer >= phoneTimer) {
-            //PHONECALL HAPPENS (THIS WORKS)
-            Debug.Log("Rrrring, rrrring! BANANA PHONE~");
-            //ANIMATE PHONE HERE
-            if (phone.GetComponent<PhoneScript>().pickedUp && (callNumber < PhoneText.Length) && finishedCall)
-            {
-                StartCoroutine(AnimateText(PhoneText, callNumber));
-                timer = 0f;
-                currentCall = callNumber;
-                callNumber++;
-            }
-            else if (phone.GetComponent<PhoneScript>().pickedUp && (callNumber < PhoneText.Length) && !finishedCall)
-            {
-            }
+            //Debug.Log("Rrrring, rrrring! BANANA PHONE~");
         }
 
         /***************/
@@ -96,6 +84,13 @@ public class GameStuff : MonoBehaviour {
     public void removeButton()
     {
         button.SetActive(false);
+    }
+    public void phoneUp()
+    {
+        randPlug = (int)(Random.value * 10);
+        PhoneText[callNumber] = PhoneText[callNumber] + PhoneNumbers[randPlug];
+        StartCoroutine(AnimateText(PhoneText, callNumber));
+        callNumber++;
     }
     
 }
