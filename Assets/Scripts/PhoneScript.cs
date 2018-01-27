@@ -20,15 +20,22 @@ public class PhoneScript : MonoBehaviour {
 	}
     private void OnMouseDown()
     {
-        
+
         if (!pickedUp)
         {
-            mainCam.GetComponent<GameStuff>().phoneUp();//ANIMATE PHONE PICKUP HERE
+            if (mainCam.GetComponent<GameStuff>().callActive) {
+                mainCam.GetComponent<GameStuff>().phoneUp();//ANIMATE PHONE PICKUP HERE
+                mainCam.GetComponent<GameStuff>().timer = 0;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                mainCam.GetComponent<GameStuff>().k = 0;
+            }
+        else
+            dialogue.text = ("...There is no call right now...");
         }
         else if(pickedUp)
         {
             //ANIMATE PHONE DROP HERE
-            mainCam.GetComponent<GameStuff>().StopAllCoroutines();//ANIMATE PHONE PICKUP HERE
+            mainCam.GetComponent<GameStuff>().StopAllCoroutines();
             dialogue.text = ("");
         }
         pickedUp = !pickedUp;

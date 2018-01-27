@@ -8,6 +8,7 @@ public class PickMeUp : MonoBehaviour {
     public Collider2D plugCollider;
     public bool overPlug;
     public int plugNum;
+    private int happyScore;
 
     /*PLUG CHOICE ASPECT*/
     public GameObject phone;
@@ -42,12 +43,21 @@ public class PickMeUp : MonoBehaviour {
     private void OnMouseUp()
     {
         if (overPlug == true)
-        {
-            transform.position = plugCollider.transform.position;
+        { 
+            transform.position = new Vector3(plugCollider.transform.position.x, plugCollider.transform.position.y, -1);
+            
+            
             if ((mainCam.GetComponent<GameStuff>().randPlug + 1) == plugCollider.GetComponent<Number>().Num)
             {
-                Debug.Log("WUSSUP HOMIE");
+                happyScore = (int)mainCam.GetComponent<GameStuff>().happyTimer;
+                mainCam.GetComponent<GameStuff>().overallScore += happyScore;
+                Debug.Log(mainCam.GetComponent<GameStuff>().overallScore + " is the player's current score.");
+
+                //ADD SCORE HERE
             }
+            if ((mainCam.GetComponent<GameStuff>().randPlug + 1) != plugCollider.GetComponent<Number>().Num)
+                Debug.Log("you aint my hommie :(");
+            //Minus Score Here
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

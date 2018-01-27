@@ -4,8 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameStuff : MonoBehaviour {
+    public int overallScore = 0;
+    public float happyTimer = 0;
+
     public int i;
     private int j;
+    public int k = 0;
     public GameObject button;
     public GameObject phone;
     public Text dialogue;
@@ -14,6 +18,9 @@ public class GameStuff : MonoBehaviour {
     public string[] PhoneNumbers;
     public int currentCall;
     public int randPlug;
+    public bool callActive;
+    public bool ye = true;
+    private int randShake;
 
     /*TIME MECHANICS*/
     public float shiftLength;      //3 minutes of gameplay
@@ -69,13 +76,34 @@ public class GameStuff : MonoBehaviour {
             shiftLength = 0f;
         }
 
-        timer += Time.deltaTime;
-        if (timer >= phoneTimer) {
-            //Debug.Log("Rrrring, rrrring! BANANA PHONE~");
+        if(happyTimer > 0)
+        {
+            happyTimer -= Time.deltaTime;
         }
+        timer += Time.deltaTime;
+        if (timer >= phoneTimer)
+        {
+            callActive = true;
 
-        /***************/
+                if (k % 2 == 1)
+                {
+                    randShake = (int)(Random.value * 3);
+                    phone.transform.rotation = Quaternion.Euler(0,0,randShake);
+                    StartCoroutine(Stall());
+                }
 
+
+                else if (k % 2 == 0)
+                {
+                    randShake = (int)(Random.value * 3);
+                    phone.transform.rotation = Quaternion.Euler(0,0,-(randShake));                    
+                    StartCoroutine(Stall());
+                }
+
+
+            /***************/
+            k++;
+        }
     }
     public void buttonPush()
     {
@@ -87,10 +115,17 @@ public class GameStuff : MonoBehaviour {
     }
     public void phoneUp()
     {
+        happyTimer = 10;
         randPlug = (int)(Random.value * 10);
         PhoneText[callNumber] = PhoneText[callNumber] + PhoneNumbers[randPlug];
         StartCoroutine(AnimateText(PhoneText, callNumber));
         callNumber++;
+        callActive = false;
+    }
+
+    IEnumerator Stall ()
+    {
+        yield return new WaitForSeconds(.1f);
     }
     
 }
