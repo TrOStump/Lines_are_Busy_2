@@ -1743,6 +1743,19 @@ MonoBehaviour:
   - answer calls from callers and connect them to the right caller. wait for their
     call to be finished and then disconnect the line.
   - 
+  PhoneText:
+  - Hello, operator? Can you connect me to 867-5309?
+  - Is this Patrick?
+  - Operator, I need to be patched into  5277-4-5437.
+  - Help! I need somebody! HELP. NOT JUST ANYBODY.
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   shiftLength: 180
   phoneTimer: 15
 --- !u!1001 &1123926664
