@@ -29,6 +29,8 @@ public class PickMeUp : MonoBehaviour {
 
         offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
 
+        GetComponent<Animator>().SetBool("cordPluggedIn", false);
+
     }
 
     void OnMouseDrag()
@@ -43,10 +45,19 @@ public class PickMeUp : MonoBehaviour {
     private void OnMouseUp()
     {
         if (overPlug == true)
-        { 
-            transform.position = new Vector3(plugCollider.transform.position.x, plugCollider.transform.position.y, -1);
-            
-            
+        {
+
+            GetComponent<Animator>().SetBool("cordPluggedIn", true);
+
+            transform.position = new Vector3((plugCollider.transform.position.x + .2f), (plugCollider.transform.position.y - 5.85f), -1);
+
+            var lights = GameObject.FindGameObjectsWithTag("light");
+            foreach (GameObject light in lights)
+            {
+                light.GetComponent<lightUp>().OnCall(plugCollider.GetComponent<Number>().Num);
+            }
+
+
             if ((mainCam.GetComponent<GameStuff>().randPlug + 1) == plugCollider.GetComponent<Number>().Num)
             {
                 happyScore = (int)mainCam.GetComponent<GameStuff>().happyTimer;
