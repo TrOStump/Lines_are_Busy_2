@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameStuff : MonoBehaviour {
     public int overallScore = 0;
     public float happyTimer = 0;
+    public int customersServed = 0;
+    public int customersSatisfied = 0;
 
     public int i;
     private int j;
@@ -74,6 +77,10 @@ public class GameStuff : MonoBehaviour {
             //END THE DAY (THIS WORKS)
             Debug.Log("TIME'S UP");
             shiftLength = 0f;
+            PlayerPrefs.SetInt("Served", customersServed);
+            PlayerPrefs.SetInt("Satisfied", customersSatisfied);
+            PlayerPrefs.SetInt("Overall", overallScore);
+            SceneManager.LoadScene("scoreboard 1");
         }
 
         if(happyTimer > 0)
@@ -114,7 +121,7 @@ public class GameStuff : MonoBehaviour {
         if (j >= 5)
         {
             timer = 0;
-            shiftLength = 180;
+            shiftLength = 60;
             phoneCollider = phone.GetComponent<Collider2D>();
             phoneCollider.enabled = true;
         }

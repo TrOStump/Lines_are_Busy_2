@@ -795,6 +795,11 @@ Prefab:
       propertyPath: m_Mass
       value: 0.57726234
       objectReference: {fileID: 0}
+    - target: {fileID: 212026268021345492, guid: 3d14808c70dd6cb459a9bf58d2da3a1a,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 58135368331346430, guid: 3d14808c70dd6cb459a9bf58d2da3a1a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3d14808c70dd6cb459a9bf58d2da3a1a, type: 2}
@@ -1506,6 +1511,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overallScore: 0
   happyTimer: 0
+  customersServed: 0
+  customersSatisfied: 0
   i: 0
   k: 0
   button: {fileID: 1636243789}
@@ -1553,7 +1560,7 @@ MonoBehaviour:
   callActive: 0
   ye: 1
   shiftLength: -11
-  phoneTimer: 5
+  phoneTimer: 15
   timer: -11
   callNumber: 0
 --- !u!1 &1107915183
@@ -1734,7 +1741,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d6f898a6fed4ff540aeefba2230f5309, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1751,12 +1758,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1135133755}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.13, y: -2.78, z: 0}
   m_LocalScale: {x: 0.528133, y: 0.58647245, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1175750005
 GameObject:
@@ -2470,7 +2477,7 @@ Transform:
   m_LocalScale: {x: 0.55, y: 0.5557728, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1572870498
 GameObject:
@@ -3498,7 +3505,7 @@ BoxCollider2D:
   m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.11, y: 0.18}

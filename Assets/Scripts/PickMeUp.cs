@@ -45,6 +45,7 @@ public class PickMeUp : MonoBehaviour {
             {
                 lightScore += 10;                               //Score + 10
                 Debug.Log("+10");
+                mainCam.GetComponent<GameStuff>().customersSatisfied++;
                 lightTimer = -11;
             }
             else if (!correctConnection && lightTimer > -10)
@@ -95,6 +96,7 @@ public class PickMeUp : MonoBehaviour {
             {
                 happyScore = (int)mainCam.GetComponent<GameStuff>().happyTimer;
                 mainCam.GetComponent<GameStuff>().overallScore += happyScore;
+                mainCam.GetComponent<GameStuff>().customersServed++;
                 Debug.Log(mainCam.GetComponent<GameStuff>().overallScore + " is the player's current score.");
                 lightTimer = 10;
                 correctConnection = true;
