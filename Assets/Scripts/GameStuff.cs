@@ -9,6 +9,9 @@ public class GameStuff : MonoBehaviour {
     public float happyTimer = 0;
     public int customersServed = 0;
     public int customersSatisfied = 0;
+    public int specificCall;
+    public bool specificBool = false;
+    public string specificMessage;
 
     public int i;
     private int j;
@@ -17,6 +20,10 @@ public class GameStuff : MonoBehaviour {
     public GameObject button;
     public GameObject phone;
     public GameObject cord;
+    public AudioClip ringing;
+    public AudioClip phonePickup;
+    public AudioClip phonePutdown;
+    public AudioSource source;
     public Text dialogue;
     public string[] OpeningText;
     public string[] PhoneText;
@@ -45,6 +52,7 @@ public class GameStuff : MonoBehaviour {
         }
     private void Start()    //Initialize stuff here
     {
+        source = gameObject.GetComponent<AudioSource>();
     }
     //This is a function for a button you press to skip to the next text
     public void SkipToNextText()
@@ -97,6 +105,7 @@ public class GameStuff : MonoBehaviour {
             if (timer >= phoneTimer)
             {
                 callActive = true;
+                source.PlayOneShot(ringing, 1);
 
                 if (k % 2 == 1)
                 {
@@ -122,10 +131,10 @@ public class GameStuff : MonoBehaviour {
     public void buttonPush()
     {
         j++;
-        if (j >= 5)
+        if (j >= OpeningText.Length-1)
         {
             timer = 0;
-            shiftLength = 60;
+            shiftLength = 180;
             phoneCollider = phone.GetComponent<Collider2D>();
             phoneCollider.enabled = true;
         }
@@ -136,19 +145,21 @@ public class GameStuff : MonoBehaviour {
     }
     public void phoneUp()
     {
-        /*if (S == 2)
+        source.Stop();
+        source.PlayOneShot(phonePickup);
+        if (S == specificCall)
         {
             happyTimer = 10;
-            randPlug = 2;
-            PhoneText[2] = "Hello this is bob";
-            StartCoroutine(AnimateText(PhoneText, 2));
-            callNumber++;
+            randPlug = 0;
+            PhoneText[specificCall] = specificMessage;
+            StartCoroutine(AnimateText(PhoneText, specificCall));
             callActive = false;
+            callNumber++;
             cord.GetComponent<PickMeUp>().multiPlugged = false;
             S++;
+            specificBool = true;
         }
         else
-        */
         {
             happyTimer = 10;
             randPlug = (int)(Random.value * 10);

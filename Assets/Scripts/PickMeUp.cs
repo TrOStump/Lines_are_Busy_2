@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PickMeUp : MonoBehaviour {
     private Vector3 screenPoint;
@@ -36,6 +37,20 @@ public class PickMeUp : MonoBehaviour {
             {
                 correctConnection = false;                      //Customer is unhappy
                 lightTimer = 0;
+                if(mainCam.GetComponent<GameStuff>().specificBool)
+                {
+                    mainCam.GetComponent<GameStuff>().specificBool = false;
+                    if(mainCam.GetComponent<Morals>().level == 2)
+                        PlayerPrefs.SetInt("Police Contact",0);
+                    else if((mainCam.GetComponent<Morals>().level == 3) && (PlayerPrefs.GetInt("Police Contact") == 0))
+                    {
+                        SceneManager.LoadScene("Bad End");
+                    }
+                    else if ((mainCam.GetComponent<Morals>().level == 3) && (PlayerPrefs.GetInt("Police Contact") == 1))
+                    {
+                        SceneManager.LoadScene("Mafia End");
+                    }
+                }
             }
             var lights = GameObject.FindGameObjectsWithTag("light");
             foreach (GameObject light in lights)
@@ -46,6 +61,23 @@ public class PickMeUp : MonoBehaviour {
             {
                 lightScore += 10;                               //Score + 10
                 Debug.Log("+10");
+                if (mainCam.GetComponent<GameStuff>().specificBool && plugCollider.GetComponent<Number>().Num == 1)
+                {
+                    if (mainCam.GetComponent<Morals>().level == 2)
+                    {
+                        PlayerPrefs.SetInt("Police Contact", 1);
+                        Debug.Log("The police have been notified.");
+                    }
+                    else if ((mainCam.GetComponent<Morals>().level == 3) && (PlayerPrefs.GetInt("Police Contact") == 1))
+                    {
+                        SceneManager.LoadScene("Police End");
+                    }
+                    else if ((mainCam.GetComponent<Morals>().level == 3) && (PlayerPrefs.GetInt("Police Contact") == 0))
+                    {
+                        SceneManager.LoadScene("meh End");
+                    }
+                    mainCam.GetComponent<GameStuff>().specificBool = false;
+                }
                 mainCam.GetComponent<GameStuff>().customersSatisfied++;
                 lightTimer = -11;
             }

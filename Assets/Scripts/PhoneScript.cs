@@ -25,6 +25,8 @@ public class PhoneScript : MonoBehaviour {
         {
             if (mainCam.GetComponent<GameStuff>().callActive) {
                 mainCam.GetComponent<GameStuff>().phoneUp();//ANIMATE PHONE PICKUP HERE
+
+                GetComponent<Animator>().SetBool("phoneAnswered", true);
                 mainCam.GetComponent<GameStuff>().timer = 0;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
                 mainCam.GetComponent<GameStuff>().k = 0;
@@ -35,7 +37,10 @@ public class PhoneScript : MonoBehaviour {
         else if(pickedUp)
         {
             //ANIMATE PHONE DROP HERE
+
+            GetComponent<Animator>().SetBool("phoneAnswered", false);
             mainCam.GetComponent<GameStuff>().StopAllCoroutines();
+            mainCam.GetComponent<GameStuff>().source.PlayOneShot(mainCam.GetComponent<GameStuff>().phonePutdown, 2);
             dialogue.text = ("");
         }
         pickedUp = !pickedUp;
