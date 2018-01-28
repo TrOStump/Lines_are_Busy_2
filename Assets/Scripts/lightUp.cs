@@ -13,10 +13,15 @@ public class lightUp : MonoBehaviour {
     {
         if (lightNum == lightNumber)
         {
-            Debug.Log("lit)");
+            Debug.Log("lit");
             SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
             renderer.color = Color.white;
         }
 
+    }
+    public void Interrupted()
+    {
+        SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
+        renderer.color = Color.black;
     }
 }

@@ -21,11 +21,12 @@ public class GameStuff : MonoBehaviour {
     public bool callActive;
     public bool ye = true;
     private int randShake;
+    private Collider2D phoneCollider;
 
     /*TIME MECHANICS*/
     public float shiftLength;      //3 minutes of gameplay
     public float phoneTimer;       //New phonecall every 15 seconds (12 calls in first shift)
-    public float timer = 0f;
+    public float timer = -11f;
     public int callNumber = 0;
     /****************/
 
@@ -37,7 +38,6 @@ public class GameStuff : MonoBehaviour {
         }
     private void Start()    //Initialize stuff here
     {
-
     }
     //This is a function for a button you press to skip to the next text
     public void SkipToNextText()
@@ -70,7 +70,7 @@ public class GameStuff : MonoBehaviour {
         if (shiftLength > 0) {
             shiftLength -= Time.deltaTime;
         }
-        else if (shiftLength < 0f) {
+        else if (shiftLength < 0 && shiftLength >= -10) {
             //END THE DAY (THIS WORKS)
             Debug.Log("TIME'S UP");
             shiftLength = 0f;
@@ -80,15 +80,17 @@ public class GameStuff : MonoBehaviour {
         {
             happyTimer -= Time.deltaTime;
         }
-        timer += Time.deltaTime;
-        if (timer >= phoneTimer)
+        if (timer > -10)
         {
-            callActive = true;
+            timer += Time.deltaTime;
+            if (timer >= phoneTimer)
+            {
+                callActive = true;
 
                 if (k % 2 == 1)
                 {
                     randShake = (int)(Random.value * 3);
-                    phone.transform.rotation = Quaternion.Euler(0,0,randShake);
+                    phone.transform.rotation = Quaternion.Euler(0, 0, randShake);
                     StartCoroutine(Stall());
                 }
 
@@ -96,18 +98,26 @@ public class GameStuff : MonoBehaviour {
                 else if (k % 2 == 0)
                 {
                     randShake = (int)(Random.value * 3);
-                    phone.transform.rotation = Quaternion.Euler(0,0,-(randShake));                    
+                    phone.transform.rotation = Quaternion.Euler(0, 0, -(randShake));
                     StartCoroutine(Stall());
                 }
 
 
-            /***************/
-            k++;
+                /***************/
+                k++;
+            }
         }
     }
     public void buttonPush()
     {
         j++;
+        if (j >= 5)
+        {
+            timer = 0;
+            shiftLength = 180;
+            phoneCollider = phone.GetComponent<Collider2D>();
+            phoneCollider.enabled = true;
+        }
     }
     public void removeButton()
     {
