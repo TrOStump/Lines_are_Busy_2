@@ -16,7 +16,7 @@ public class Scoreboard : MonoBehaviour {
 	void Update () {
         scoreboard1.text = ("Customers Served: " + PlayerPrefs.GetInt("Served"));
         scoreboard2.text = ("Customers Satisfied: " + PlayerPrefs.GetInt("Satisfied"));
-        scoreboard1.text = ("Overall Score: " + PlayerPrefs.GetInt("Overall"));
+        scoreboard3.text = ("Overall Score: " + PlayerPrefs.GetInt("Overall"));
 
 
     }

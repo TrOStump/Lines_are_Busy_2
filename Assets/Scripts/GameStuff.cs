@@ -13,18 +13,22 @@ public class GameStuff : MonoBehaviour {
     public int i;
     private int j;
     public int k = 0;
+    public int S;
     public GameObject button;
     public GameObject phone;
+    public GameObject cord;
     public Text dialogue;
     public string[] OpeningText;
     public string[] PhoneText;
     public string[] PhoneNumbers;
+    public string[] Locations;
     public int currentCall;
     public int randPlug;
     public bool callActive;
     public bool ye = true;
     private int randShake;
     private Collider2D phoneCollider;
+    public int linguistics;
 
     /*TIME MECHANICS*/
     public float shiftLength;      //3 minutes of gameplay
@@ -132,12 +136,38 @@ public class GameStuff : MonoBehaviour {
     }
     public void phoneUp()
     {
-        happyTimer = 10;
-        randPlug = (int)(Random.value * 10);
-        PhoneText[callNumber] = PhoneText[callNumber] + PhoneNumbers[randPlug];
-        StartCoroutine(AnimateText(PhoneText, callNumber));
-        callNumber++;
-        callActive = false;
+        /*if (S == 2)
+        {
+            happyTimer = 10;
+            randPlug = 2;
+            PhoneText[2] = "Hello this is bob";
+            StartCoroutine(AnimateText(PhoneText, 2));
+            callNumber++;
+            callActive = false;
+            cord.GetComponent<PickMeUp>().multiPlugged = false;
+            S++;
+        }
+        else
+        */
+        {
+            happyTimer = 10;
+            randPlug = (int)(Random.value * 10);
+            linguistics = (int)(Random.value * 10);
+
+            if (linguistics % 2 == 1)
+            {
+                PhoneText[callNumber] = PhoneText[callNumber] + PhoneNumbers[randPlug];
+            }
+            if (linguistics % 2 == 0)
+            {
+                PhoneText[callNumber] = PhoneText[callNumber] + Locations[randPlug];
+            }
+            StartCoroutine(AnimateText(PhoneText, callNumber));
+            callNumber++;
+            callActive = false;
+            cord.GetComponent<PickMeUp>().multiPlugged = false;
+            S++;
+        }
     }
 
     IEnumerator Stall ()

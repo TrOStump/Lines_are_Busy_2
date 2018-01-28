@@ -12,6 +12,7 @@ public class PickMeUp : MonoBehaviour {
     private bool correctConnection = false;
     private int happyScore = 0;
     private int lightScore = 0;
+    public bool multiPlugged = false;
 
     /*PLUG CHOICE ASPECT*/
     public GameObject phone;
@@ -92,14 +93,15 @@ public class PickMeUp : MonoBehaviour {
             }
 
 
-            if ((mainCam.GetComponent<GameStuff>().randPlug + 1) == plugCollider.GetComponent<Number>().Num)
+            if ((mainCam.GetComponent<GameStuff>().randPlug + 1) == plugCollider.GetComponent<Number>().Num && !multiPlugged)
             {
                 happyScore = (int)mainCam.GetComponent<GameStuff>().happyTimer;
                 mainCam.GetComponent<GameStuff>().overallScore += happyScore;
                 mainCam.GetComponent<GameStuff>().customersServed++;
-                Debug.Log(mainCam.GetComponent<GameStuff>().overallScore + " is the player's current score.");
+                Debug.Log(mainCam.GetComponent<GameStuff>().customersServed + " is how many customers were served.");
                 lightTimer = 10;
                 correctConnection = true;
+                multiPlugged = true;
             }
             if ((mainCam.GetComponent<GameStuff>().randPlug + 1) != plugCollider.GetComponent<Number>().Num)
             {
