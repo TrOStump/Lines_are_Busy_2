@@ -61,7 +61,7 @@ public class PickMeUp : MonoBehaviour {
             {
                 lightScore += 10;                               //Score + 10
                 Debug.Log("+10");
-                if (mainCam.GetComponent<GameStuff>().specificBool && plugCollider.GetComponent<Number>().Num == 1)
+                if (mainCam.GetComponent<GameStuff>().specificBool && plugCollider.GetComponent<Number>().Num == mainCam.GetComponent<Morals>().correctPlug)
                 {
                     if (mainCam.GetComponent<Morals>().level == 2)
                     {

@@ -12,6 +12,8 @@ public class Morals : MonoBehaviour {
     // Use this for initialization
     void Start() {
         mainCam = GameObject.Find("Main Camera");
+        if (level == 1)
+            PlayerPrefs.SetInt("Police Contact", 0);
     }
        
 	
@@ -52,7 +54,6 @@ public class Morals : MonoBehaviour {
         }
         else
         {
-            Debug.Log("YOU DUN GOOFED.");
         }
     }
 

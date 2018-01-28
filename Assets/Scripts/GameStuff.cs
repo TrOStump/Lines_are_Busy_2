@@ -92,7 +92,11 @@ public class GameStuff : MonoBehaviour {
             PlayerPrefs.SetInt("Served", customersServed);
             PlayerPrefs.SetInt("Satisfied", customersSatisfied);
             PlayerPrefs.SetInt("Overall", overallScore);
+            if (gameObject.GetComponent<Morals>().level ==1)
             SceneManager.LoadScene("scoreboard 1");
+
+            else if (gameObject.GetComponent<Morals>().level == 2)
+                SceneManager.LoadScene("scoreboard 2");
         }
 
         if(happyTimer > 0)

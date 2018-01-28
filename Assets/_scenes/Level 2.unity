@@ -1802,7 +1802,7 @@ MonoBehaviour:
   ye: 1
   linguistics: 0
   shiftLength: -11
-  phoneTimer: 15
+  phoneTimer: 10
   timer: -11
   callNumber: 0
 --- !u!82 &1063130951
@@ -1896,7 +1896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b2171e611563be46b5f6c55a6524373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
+  level: 2
   policeMoral: 0
   correctPlug: 0
   mainCam: {fileID: 0}

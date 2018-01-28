@@ -23,3 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_scenes/Level 3.unity
     guid: b72e554faff26f344a934581a72d2159
+  - enabled: 1
+    path: Assets/_scenes/end.unity
+    guid: 0db0e7984fb4c9b408e645ab866e3b1f
+  - enabled: 1
+    path: Assets/_scenes/Scoreboard 2.unity
+    guid: 37fe7db75f4d21d478c5c09d99cfdf4b
