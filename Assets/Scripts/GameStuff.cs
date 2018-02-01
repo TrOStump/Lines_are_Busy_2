@@ -173,13 +173,6 @@ public class GameStuff : MonoBehaviour {
             randPlug = specificPlug;
             PhoneText[specificCall] = specificMessage;
             StartCoroutine(AnimateText(PhoneText, specificCall));
-<<<<<<< HEAD
-            callActive = false;
-            callNumber++;
-            S++;
-=======
-            specificBool = true;
->>>>>>> origin/Allan's-Version
         }
         else
         {
