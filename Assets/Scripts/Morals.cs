@@ -23,8 +23,7 @@ public class Morals : MonoBehaviour {
         if (level == 2)
         {
             correctPlug = 1;
-            mainCam.GetComponent<GameStuff>().specificCall = 3;
-            mainCam.GetComponent<GameStuff>().specificBool = false;
+            mainCam.GetComponent<GameStuff>().specificCall = 0;
             mainCam.GetComponent<GameStuff>().specificMessage = "Hello, I think I'm being followed... Oh shi- *gunshot*";
         }
         else if (level == 3 && policeMoral == 0)

@@ -13,8 +13,9 @@ public class GameStuff : MonoBehaviour {
 
 	/*SPECIAL DIALOGUE MECHANICS*/
     public int specificCall;
-    public bool specificBool = false;
+    public bool specificBool=false;
     public string specificMessage;
+    public int specificPlug;
 
 	/*VARIOUS INTEGERS*/
     public int i;
@@ -161,14 +162,15 @@ public class GameStuff : MonoBehaviour {
     {
         if (S == specificCall)
         {
+
+            specificBool = true;
             happyTimer = 10;
-            randPlug = 0;
+            randPlug = specificPlug;
             PhoneText[specificCall] = specificMessage;
             StartCoroutine(AnimateText(PhoneText, specificCall));
             callActive = false;
             callNumber++;
             S++;
-            specificBool = true;
         }
         else
         {
