@@ -14,6 +14,8 @@ public class Morals : MonoBehaviour {
         mainCam = GameObject.Find("Main Camera");
         if (level == 1)
             PlayerPrefs.SetInt("Police Contact", 0);
+        if (level ==2)
+            PlayerPrefs.SetInt("Police Contact", 0);
     }
        
 	
@@ -32,14 +34,12 @@ public class Morals : MonoBehaviour {
             {
                 correctPlug = 5;
                 mainCam.GetComponent<GameStuff>().specificCall = 3;
-                mainCam.GetComponent<GameStuff>().specificBool = false;
                 mainCam.GetComponent<GameStuff>().specificMessage = "We know what you did, don't even deny it, if you value your life do not correctly connect detective Grant when he calls. Now connect me to Vito's";
                 F++;
             }
             if (F == 1)
                 correctPlug = 1;
             mainCam.GetComponent<GameStuff>().specificCall = 5;
-            mainCam.GetComponent<GameStuff>().specificBool = false;
             mainCam.GetComponent<GameStuff>().specificMessage = "This is Dectective Grant. I must be connected immediately to the police station.";
 
 
@@ -48,7 +48,6 @@ public class Morals : MonoBehaviour {
         else if (level == 3 && policeMoral == 1)
         {
             mainCam.GetComponent<GameStuff>().specificCall = 3;
-            mainCam.GetComponent<GameStuff>().specificBool = false;
             mainCam.GetComponent<GameStuff>().specificMessage = "You think you're so smart huh, letting the fuzz know about our work. I hope you've said goodbye for yoour loved ones because we are coming for you";
         }
         else
