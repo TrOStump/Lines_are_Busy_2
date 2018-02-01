@@ -23,24 +23,25 @@ public class PhoneScript : MonoBehaviour {
 
         if (!pickedUp)
         {
-            if (mainCam.GetComponent<GameStuff>().callActive) {
-                mainCam.GetComponent<GameStuff>().phoneUp();//ANIMATE PHONE PICKUP HERE
+			mainCam.GetComponent<GameStuff>().source.Stop();
+			mainCam.GetComponent<GameStuff>().source.PlayOneShot(mainCam.GetComponent<GameStuff>().phonePickup);
 
+            if (mainCam.GetComponent<GameStuff>().callActive)
+			{
+                mainCam.GetComponent<GameStuff>().phoneUp();
                 GetComponent<Animator>().SetBool("phoneAnswered", true);
                 mainCam.GetComponent<GameStuff>().timer = 0;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
                 mainCam.GetComponent<GameStuff>().k = 0;
             }
-        else
-            dialogue.text = ("...There is no call right now...");
+			else
+           		dialogue.text = ("...There is no call right now...");
         }
         else if(pickedUp)
         {
-            //ANIMATE PHONE DROP HERE
-
             GetComponent<Animator>().SetBool("phoneAnswered", false);
             mainCam.GetComponent<GameStuff>().StopAllCoroutines();
-            mainCam.GetComponent<GameStuff>().source.PlayOneShot(mainCam.GetComponent<GameStuff>().phonePutdown, 2);
+            mainCam.GetComponent<GameStuff>().source.PlayOneShot(mainCam.GetComponent<GameStuff>().phonePutdown);
             dialogue.text = ("");
         }
         pickedUp = !pickedUp;

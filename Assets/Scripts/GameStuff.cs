@@ -5,37 +5,50 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameStuff : MonoBehaviour {
+	/*SCORE MECHANICS*/
     public int overallScore = 0;
     public float happyTimer = 0;
     public int customersServed = 0;
     public int customersSatisfied = 0;
+
+	/*SPECIAL DIALOGUE MECHANICS*/
     public int specificCall;
     public bool specificBool = false;
     public string specificMessage;
 
+	/*VARIOUS INTEGERS*/
     public int i;
     private int j;
     public int k = 0;
     public int S;
+	public int linguistics;
+
+	/*GAME OBJECTS*/
     public GameObject button;
     public GameObject phone;
     public GameObject cord;
-    public AudioClip ringing;
-    public AudioClip phonePickup;
-    public AudioClip phonePutdown;
-    public AudioSource source;
+
+	/*TEXT MECHANICS*/
     public Text dialogue;
     public string[] OpeningText;
     public string[] PhoneText;
     public string[] PhoneNumbers;
     public string[] Locations;
+	private int currentlyDisplayingText = 0;
+
+	/*PLUG MECHANICS*/
     public int currentCall;
     public int randPlug;
     public bool callActive;
-    public bool ye = true;
+    //public bool ye = true;
+
+	/*PHONE RING MECHANICS*/
+	public AudioClip ringing;
+	public AudioClip phonePickup;
+	public AudioClip phonePutdown;
+	public AudioSource source;
     private int randShake;
     private Collider2D phoneCollider;
-    public int linguistics;
 
     /*TIME MECHANICS*/
     public float shiftLength;      //3 minutes of gameplay
@@ -43,38 +56,17 @@ public class GameStuff : MonoBehaviour {
     public float timer = -11f;
     public int callNumber = 0;
     /****************/
+	 
+    void Awake()
+    {
+        StartCoroutine(AnimateText(OpeningText, currentlyDisplayingText));	//Display opening text.
+    }
 
-        
-    int currentlyDisplayingText = 0;
-        void Awake()
-        {
-            StartCoroutine(AnimateText(OpeningText, currentlyDisplayingText));
-        }
     private void Start()    //Initialize stuff here
     {
         source = gameObject.GetComponent<AudioSource>();
     }
-    //This is a function for a button you press to skip to the next text
-    public void SkipToNextText()
-        {
-            StopAllCoroutines();
-            currentlyDisplayingText++;
-            //If we've reached the end of the array, do anything you want. I just restart the example text
-            if (currentlyDisplayingText > OpeningText.Length)
-            {
-                currentlyDisplayingText = 0;
-            }
-         StartCoroutine(AnimateText(OpeningText, currentlyDisplayingText));
-    }
-        //Note that the speed you want the typewriter effect to be going at is the yield waitforseconds (in my case it's 1 letter for every      0.03 seconds, replace this with a public float if you want to experiment with speed in from the editor)
-        IEnumerator AnimateText(string[] textArray, int call)
-        {
-            for (i = 0; i <= (textArray[call].Length); i++)
-            {
-                dialogue.text = textArray[call].Substring(0, i);
-                yield return new WaitForSeconds(.03f);
-            }
-        }
+		
     public void Update()
     {
         if (j == (OpeningText.Length)-1)
@@ -109,13 +101,15 @@ public class GameStuff : MonoBehaviour {
             if (timer >= phoneTimer)
             {
                 callActive = true;
-                source.PlayOneShot(ringing, 1);
+				if (!source.isPlaying)
+					source.Play();
 
                 if (k % 2 == 1)
                 {
                     randShake = (int)(Random.value * 3);
                     phone.transform.rotation = Quaternion.Euler(0, 0, randShake);
                     StartCoroutine(Stall());
+					k = 0; //Prevents k from growing massive, but is otherwise useless
                 }
 
 
@@ -132,25 +126,39 @@ public class GameStuff : MonoBehaviour {
             }
         }
     }
+	//This is a function for a button you press to skip to the next text
     public void buttonPush()
     {
         j++;
         if (j >= OpeningText.Length-1)
         {
             timer = 0;
-            shiftLength = 180;
+			if (gameObject.GetComponent<Morals> ().level == 1)
+				shiftLength = 60;
+			else if (gameObject.GetComponent<Morals> ().level == 2)
+				shiftLength = 120;
+			else
+				shiftLength = 180;
             phoneCollider = phone.GetComponent<Collider2D>();
             phoneCollider.enabled = true;
         }
     }
+	public void SkipToNextText()
+	{
+		StopAllCoroutines();
+		currentlyDisplayingText++;
+		if (currentlyDisplayingText > OpeningText.Length)
+		{
+			currentlyDisplayingText = 0;
+		}
+		StartCoroutine(AnimateText(OpeningText, currentlyDisplayingText));
+	}
     public void removeButton()
     {
         button.SetActive(false);
     }
     public void phoneUp()
     {
-        source.Stop();
-        source.PlayOneShot(phonePickup);
         if (S == specificCall)
         {
             happyTimer = 10;
@@ -159,7 +167,6 @@ public class GameStuff : MonoBehaviour {
             StartCoroutine(AnimateText(PhoneText, specificCall));
             callActive = false;
             callNumber++;
-            cord.GetComponent<PickMeUp>().multiPlugged = false;
             S++;
             specificBool = true;
         }
@@ -180,11 +187,19 @@ public class GameStuff : MonoBehaviour {
             StartCoroutine(AnimateText(PhoneText, callNumber));
             callNumber++;
             callActive = false;
-            cord.GetComponent<PickMeUp>().multiPlugged = false;
             S++;
         }
     }
 
+	/*COROUTINES*/
+	IEnumerator AnimateText(string[] textArray, int call)
+	{
+		for (i = 0; i <= (textArray[call].Length); i++)
+		{
+			dialogue.text = textArray[call].Substring(0, i);
+			yield return new WaitForSeconds(.03f);	//Slows the text scroll. Change .03f to a public float in order to change based on caller.
+		}
+	}
     IEnumerator Stall ()
     {
         yield return new WaitForSeconds(.1f);

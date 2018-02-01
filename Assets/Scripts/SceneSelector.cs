@@ -4,10 +4,22 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneSelector : MonoBehaviour {
-    public string levelname;
 
+	private int nextLevel;
+	private Scene currentLevel;
+
+
+	private void Start(){
+		currentLevel = SceneManager.GetActiveScene ();
+	}
     public void NextDay()
     {
-        SceneManager.LoadScene(levelname);
+		if (currentLevel.name == "Menu")
+			nextLevel = 1;
+		else
+			nextLevel = PlayerPrefs.GetInt ("Next Level") + 1;
+		
+		PlayerPrefs.SetInt ("Next Level", nextLevel);
+		SceneManager.LoadScene ("Level " + nextLevel);
     }
 }

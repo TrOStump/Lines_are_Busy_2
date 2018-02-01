@@ -7,13 +7,13 @@ public class PickMeUp : MonoBehaviour {
     private Vector3 screenPoint;
     private Vector3 offset;
     public Collider2D plugCollider;
-    public bool overPlug;
+    private bool overPlug;
     public int plugNum;
-    private float lightTimer = -11;
+    public float lightTimer = -11;
     private bool correctConnection = false;
     private int happyScore = 0;
     private int lightScore = 0;
-    public bool multiPlugged = false;
+	private int callerID = -1;
 
     /*PLUG CHOICE ASPECT*/
     public GameObject phone;
@@ -23,16 +23,22 @@ public class PickMeUp : MonoBehaviour {
     private void Start()
     {
         mainCam = GameObject.Find("Main Camera");
-        //plugOrder = new int[mainCam.GetComponent<GameStuff>().PhoneText.Length];
+		Physics2D.IgnoreLayerCollision (8, 8, true);			//PREVENTS CORD COLLISION
+		//plugOrder = new int[mainCam.GetComponent<GameStuff>().PhoneText.Length];
     }
     private void Update()
     {
-        if (overPlug == true)
-            lightTimer -= Time.deltaTime;
+		if (overPlug == true && lightTimer > -10)
+			lightTimer -= Time.deltaTime;
+		else if (overPlug == true && lightTimer <= -11) {
+			
+		}
 
         //If the plug is in AND the timer runs out, or if the timer is still active after the plug being removed
         if ((overPlug == true && lightTimer <= 0 && lightTimer > -10) || (overPlug == false && lightTimer > 0))
         {
+			LightsOut ();	//Turns off any light with no cord in its respective plug
+
             if (lightTimer > 0)                                 //If the timer is still active (meaning the call wasn't finished)
             {
                 correctConnection = false;                      //Customer is unhappy
@@ -51,11 +57,6 @@ public class PickMeUp : MonoBehaviour {
                         SceneManager.LoadScene("Mafia End");
                     }
                 }
-            }
-            var lights = GameObject.FindGameObjectsWithTag("light");
-            foreach (GameObject light in lights)
-            {
-                light.GetComponent<lightUp>().Interrupted();    //Turn off all lights
             }
             if (correctConnection && lightTimer > -10)                             //If customer is happy
             {
@@ -80,6 +81,7 @@ public class PickMeUp : MonoBehaviour {
                 }
                 mainCam.GetComponent<GameStuff>().customersSatisfied++;
                 lightTimer = -11;
+				LightsOut ();
             }
             else if (!correctConnection && lightTimer > -10)
             {
@@ -106,7 +108,7 @@ public class PickMeUp : MonoBehaviour {
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint)+offset;
- transform.position = curPosition;
+ 		transform.position = curPosition;
 
     }
 
@@ -125,7 +127,7 @@ public class PickMeUp : MonoBehaviour {
             }
 
 
-            if ((mainCam.GetComponent<GameStuff>().randPlug + 1) == plugCollider.GetComponent<Number>().Num && !multiPlugged)
+			if ((mainCam.GetComponent<GameStuff>().randPlug + 1) == plugCollider.GetComponent<Number>().Num && (callerID != mainCam.GetComponent<GameStuff>().callNumber))
             {
                 happyScore = (int)mainCam.GetComponent<GameStuff>().happyTimer;
                 mainCam.GetComponent<GameStuff>().overallScore += happyScore;
@@ -133,7 +135,7 @@ public class PickMeUp : MonoBehaviour {
                 Debug.Log(mainCam.GetComponent<GameStuff>().customersServed + " is how many customers were served.");
                 lightTimer = 10;
                 correctConnection = true;
-                multiPlugged = true;
+				callerID = mainCam.GetComponent<GameStuff> ().callNumber;
             }
             if ((mainCam.GetComponent<GameStuff>().randPlug + 1) != plugCollider.GetComponent<Number>().Num)
             {
@@ -157,11 +159,18 @@ public class PickMeUp : MonoBehaviour {
         if (collision.gameObject.CompareTag("Plug"))
         {
             overPlug = false;
-            var lights = GameObject.FindGameObjectsWithTag("light");
-            foreach (GameObject light in lights)
-            {
-                light.GetComponent<lightUp>().Interrupted();
-            }
+			LightsOut ();
         }
     }
+	private void LightsOut()
+	{
+		var lights = GameObject.FindGameObjectsWithTag("light");
+		foreach (GameObject light in lights)
+		{//Checks all lights and turns them off ONLY if they're equal to the current plug collider's number
+			if(light.GetComponent<lightUp>().lightNumber == plugCollider.GetComponent<Number>().Num){
+				light.GetComponent<lightUp>().Interrupted();
+				//Still turns it off while dragging one cord over another cord's current plug, SHOULD FIX LATER
+			}
+		}
+	}
 }
