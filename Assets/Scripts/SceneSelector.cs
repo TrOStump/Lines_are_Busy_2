@@ -17,7 +17,7 @@ public class SceneSelector : MonoBehaviour {
 		if (currentLevel.name == "Menu")
 			nextLevel = 1;
 		else
-			nextLevel = PlayerPrefs.GetInt ("Next Level") + 1;
+			nextLevel = PlayerPrefs.GetInt ("Next Level");
 		
 		PlayerPrefs.SetInt ("Next Level", nextLevel);
 		SceneManager.LoadScene ("Level " + nextLevel);

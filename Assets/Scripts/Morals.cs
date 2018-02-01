@@ -14,6 +14,7 @@ public class Morals : MonoBehaviour {
         mainCam = GameObject.Find("Main Camera");
         if (level == 1)
             PlayerPrefs.SetInt("Police Contact", 0);
+		PlayerPrefs.SetInt ("Next Level", level + 1);
     }
        
 	
