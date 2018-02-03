@@ -1687,6 +1687,7 @@ MonoBehaviour:
   specificCall: 1
   specificBool: 0
   specificMessage: 
+  specificPlug: 0
   i: 0
   k: 0
   S: 0
@@ -1723,6 +1724,17 @@ MonoBehaviour:
   - '''Ello, if you could, could you get me through to '
   - 'Operator, please get me through to '
   - 'Hello, Operator? Could you patch me through to '
+  - 'Ay, yeah, I needa connect to my brother at '
+  - 'Hello operator. If you could, I have a message for someone at '
+  - 'Yeah, hi, mind if I get put through to '
+  - 'Oh, hello, yes. I um, I need to speak to my friend at '
+  - 'Ah yes, hello. Would you be so kind as to connect me to '
+  - '. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . '
+  - 'You really must be a cheater. There''s no way. Anyway, get me through to '
+  - 'You really must be a cheater. There''s no way. Anyway, get me through to '
+  - 'You really must be a cheater. There''s no way. Anyway, get me through to '
+  - 'You really must be a cheater. There''s no way. Anyway, get me through to '
   - 'You really must be a cheater. There''s no way. Anyway, get me through to '
   PhoneNumbers:
   - 111?
@@ -1754,7 +1766,7 @@ MonoBehaviour:
   phonePutdown: {fileID: 8300000, guid: cf1e4b9644e52400892d1f2aeaccd34e, type: 3}
   source: {fileID: 0}
   shiftLength: -11
-  phoneTimer: 8
+  phoneTimer: 9
   timer: -11
   callNumber: 0
 --- !u!82 &1063130951

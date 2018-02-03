@@ -48,13 +48,13 @@ public class GameStuff : MonoBehaviour {
 	public AudioClip phonePickup;
 	public AudioClip phonePutdown;
 	public AudioSource source;
-    private int randShake;
+    private int randShake;			//Random degree value of the phone's shaking
     private Collider2D phoneCollider;
 
     /*TIME MECHANICS*/
-    public float shiftLength;      //3 minutes of gameplay
-    public float phoneTimer;       //New phonecall every 15 seconds (12 calls in first shift)
-    public float timer = -11f;
+    public float shiftLength;      	//3 minutes of gameplay
+    public float phoneTimer;       	//New phonecall happens every phoneTimer seconds.
+    public float timer = -11f;		//timer counts upward until it equals phoneTimer, then the phone starts ringing.
     public int callNumber = 0;
     /****************/
 
@@ -66,10 +66,6 @@ public class GameStuff : MonoBehaviour {
 
     public void Update()	//Bulk of the coding
     {
-        if (j == (OpeningText.Length)-1)	//If the button has been pressed one time less than how long the opening text is
-            removeButton();
-
-
         /*TIME MECHANICS*/
         if (shiftLength > 0)				//If the shift isn't over
             shiftLength -= Time.deltaTime;	//Countdown
@@ -99,18 +95,17 @@ public class GameStuff : MonoBehaviour {
 
 				/*PHONE RINGING ANIMATION*/
                 if (k % 2 == 1)
-                {
+				{	//If K is odd, shake to the right by randShake degrees
                     randShake = (int)(Random.value * 3);
                     phone.transform.rotation = Quaternion.Euler(0, 0, randShake);
-                    StartCoroutine(Stall());
+					StartCoroutine(Stall());	//(pause very slightly)
 					k = 0; //Prevents k from growing massive, but is otherwise useless
                 }
-
                 else if (k % 2 == 0)
-                {
+                {	//If K is even, shake to the left by randShake degrees
                     randShake = (int)(Random.value * 3);
                     phone.transform.rotation = Quaternion.Euler(0, 0, -(randShake));
-                    StartCoroutine(Stall());
+					StartCoroutine(Stall());	//(pause very slightly)
                 }
                 k++;
 				/***************/
@@ -120,63 +115,57 @@ public class GameStuff : MonoBehaviour {
 	//This is a function for a button you press to skip to the next text
     public void buttonPush()
     {
-        j++;
+        j++;	//increment the number of times the button has been pushed
         if (j >= OpeningText.Length-1)
-        {
-            timer = 0;
-			if (gameObject.GetComponent<Morals> ().level == 1)
+		{//If it has been pushed one less time than the number of lines of dialogue in the opening text (or has been pushed more somehow)
+            timer = 0;	//Timer start
+			if (gameObject.GetComponent<Morals> ().level == 1)		//If level 1, shift is 1 minute long
 				shiftLength = 60;
-			else if (gameObject.GetComponent<Morals> ().level == 2)
+			else if (gameObject.GetComponent<Morals> ().level == 2)	//Else if level 2, shift is 2 minutes long
 				shiftLength = 120;
-			else
+			else 													//Else if any other level, shift is 3 minutes long
 				shiftLength = 180;
-            phoneCollider = phone.GetComponent<Collider2D>();
-            phoneCollider.enabled = true;
+            phoneCollider = phone.GetComponent<Collider2D>();		//Get the phone's hitbox
+            phoneCollider.enabled = true;							//Turn on the phone's hitbox
+			button.SetActive(false);								//Removes the button
         }
     }
 	//This is a function that skips forward in the opening text
 	public void SkipToNextText()
-	{
+	{//Stops dialogue from scrolling, moves to the next line of dialogue, resets the line to the start, then displays that line
 		StopAllCoroutines();
 		currentlyDisplayingText++;
 		if (currentlyDisplayingText > OpeningText.Length)
-		{
 			currentlyDisplayingText = 0;
-		}
 		StartCoroutine(AnimateText(OpeningText, currentlyDisplayingText));
 	}
-	//This is a function that removes the button...... duh.
-    public void removeButton()
-    {
-        button.SetActive(false);
-    }
+
 	/************************************************************************
+	 * 
 	 * public void phoneUp() is a function that:
 	 * 	1.) Checks if the current call is the specific call
-	 * 		a.) If it is, the randomPlug is set (to 0?) and the specific
-	 * 			message is displayed. Then, specificBool is set to true.
+	 * 		a.) If it is, specificBool is set to true, randPlug is set to the
+	 * 			specificPlug, and the specificCall starts displaying.
 	 * 		b.) If it isn't, randomPlug and linguistics are set to random 
 	 * 			numbers between 1 and 10 inclusive, then based on the value
 	 * 			of linguistics, concatenates a random phone number or
 	 * 			location string to the end of the PhoneText at callNumber.
-	 * 			This is displayed, the callNumber an
+	 * 			This is then displayed.
+	 * 	2.)	Starts the happyTimer, increments the callNumber and S, and sets
+	 * 		callActive to false (meaning that there is no call currently).
 	 * 
 	************************************************************************/
-
     public void phoneUp()
     {
         if (S == specificCall)
         {
-
             specificBool = true;
-            happyTimer = 10;
             randPlug = specificPlug;
             PhoneText[specificCall] = specificMessage;
             StartCoroutine(AnimateText(PhoneText, specificCall));
         }
         else
         {
-            happyTimer = 10;
             randPlug = (int)(Random.value * 10);
             linguistics = (int)(Random.value * 10);
 
@@ -190,12 +179,14 @@ public class GameStuff : MonoBehaviour {
             }
             StartCoroutine(AnimateText(PhoneText, callNumber));
         }
+		happyTimer = 10;
 		callNumber++;
 		S++;
 		callActive = false;
     }
 
 	/*COROUTINES*/
+	//AnimateText animates the text by only displaying the substring from 0 to i, incrementing i after 0.03 seconds
 	IEnumerator AnimateText(string[] textArray, int call)
 	{
 		for (i = 0; i <= (textArray[call].Length); i++)
@@ -204,6 +195,7 @@ public class GameStuff : MonoBehaviour {
 			yield return new WaitForSeconds(.03f);	//Slows the text scroll. Change .03f to a public float in order to change based on caller.
 		}
 	}
+	//Stall stalls the code for 0.1 seconds (used in the phone animation section for making sure the ringing is visible)
     IEnumerator Stall ()
     {
         yield return new WaitForSeconds(.1f);

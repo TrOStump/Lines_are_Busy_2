@@ -14,10 +14,9 @@ public class Scoreboard : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		/*CONSIDER MOVING THIS TO Start() INSTEAD, SINCE THESE VALUES SHOULD *NOT* CHANGE DURING THIS SCENE*/
         scoreboard1.text = ("Customers Served: " + PlayerPrefs.GetInt("Served"));
         scoreboard2.text = ("Customers Satisfied: " + PlayerPrefs.GetInt("Satisfied"));
         scoreboard3.text = ("Overall Score: " + PlayerPrefs.GetInt("Overall"));
-
-
     }
 }

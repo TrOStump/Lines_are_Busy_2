@@ -10,16 +10,16 @@ public class SceneSelector : MonoBehaviour {
 
 
 	private void Start(){
-		currentLevel = SceneManager.GetActiveScene ();
+		currentLevel = SceneManager.GetActiveScene ();		//currentLevel is the current scene
 	}
     public void NextDay()
     {
-		if (currentLevel.name == "Menu")
-			nextLevel = 1;
-		else
+		if (currentLevel.name == "Menu")	//If the current scene is the menu
+			nextLevel = 1;					//The next level is Level 1
+		else//Otherwise, the next level is whatever the PlayerPrefs says it is
 			nextLevel = PlayerPrefs.GetInt ("Next Level");
-		
-		PlayerPrefs.SetInt ("Next Level", nextLevel);
-		SceneManager.LoadScene ("Level " + nextLevel);
+
+		PlayerPrefs.SetInt ("Next Level", nextLevel);	//Next Level PLayerPref set
+		SceneManager.LoadScene ("Level " + nextLevel);	//Load the next level
     }
 }
