@@ -21,6 +21,7 @@ public class PickMeUp : MonoBehaviour {
 	public Collider2D plugCollider;
 	private bool overPlug;
 	public int plugNum;
+    public bool pluggedIn = false;
 
 	/*Misc. Game Objects*/
     public GameObject phone;
@@ -143,13 +144,14 @@ public class PickMeUp : MonoBehaviour {
                 correctConnection = false;										//This IS NOT the correct connection
 				happyScore -= 2;												//decrement happyScore								
             }
+            pluggedIn = true; // cord is plugged in
         }
     }
 
 	//Function that fires upon trigger collider enter (PLUGS)
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Plug"))	//If the cord enters a plug's collider
+        if (collision.gameObject.CompareTag("Plug"))	//If the cord enters a plug's collider and is not in a cord's collider
         {
             plugCollider = collision;					//plugCollider is the current collider it is over
             overPlug = true;							//The cord is now over a plug
@@ -159,10 +161,14 @@ public class PickMeUp : MonoBehaviour {
 	//Function that fires upon trigger collider exit (PLUGS)
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Plug"))	//If the cord leaves the plug's collider
+        if (pluggedIn == true) // if the plugged in cord is being moved not another cord
         {
-            overPlug = false;							//It is no longer over the plug
-			LightsOut ();								//Turn off its respective light, if it is on
+            if (collision.gameObject.CompareTag("Plug"))    //If the cord leaves the plug's collider
+            {
+                overPlug = false;                           //It is no longer over the plug
+                LightsOut();                                //Turn off its respective light, if it is on
+                pluggedIn = false;
+            }
         }
     }
 
