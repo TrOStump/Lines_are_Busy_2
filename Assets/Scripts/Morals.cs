@@ -20,7 +20,7 @@ public class Morals : MonoBehaviour {
     }
        
 	void Update () {
-        if (level == 2)
+        /*if (level == 2)
         {//If this is level 2, set up level 2's specific call
             correctPlug = 1;
             mainCam.GetComponent<GameStuff>().specificCall = 0;
@@ -48,7 +48,7 @@ public class Morals : MonoBehaviour {
         }
         else
         {
-        }
+        }*/
     }
 
 }

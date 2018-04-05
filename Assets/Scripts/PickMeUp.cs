@@ -122,7 +122,7 @@ public class PickMeUp : MonoBehaviour {
         if (overPlug == true)	//If the cord is over a plug
         {
 			/*Snap the cord into the center position of the plug, then animate it being plugged in.*/
-			transform.position = new Vector3((plugCollider.transform.position.x + .2f), (plugCollider.transform.position.y - .27f), -1);
+			transform.position = new Vector3((plugCollider.transform.position.x + .0f), (plugCollider.transform.position.y - .7f), -1);
             GetComponent<Animator>().SetBool("cordPluggedIn", true);
 
             var lights = GameObject.FindGameObjectsWithTag("light");			//Create an array of lights
