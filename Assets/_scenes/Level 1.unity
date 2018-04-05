@@ -971,6 +971,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 2
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &500717549
 Rigidbody2D:
   serializedVersion: 4
@@ -1175,6 +1177,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 50200585846170792, guid: 3d14808c70dd6cb459a9bf58d2da3a1a,
+        type: 2}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 58135368331346430, guid: 3d14808c70dd6cb459a9bf58d2da3a1a, type: 2}
     - {fileID: 70637024921663898, guid: 3d14808c70dd6cb459a9bf58d2da3a1a, type: 2}
@@ -1227,6 +1234,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 10
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &532282587
 Rigidbody2D:
   serializedVersion: 4
@@ -1855,6 +1864,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 6
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &936675745
 Rigidbody2D:
   serializedVersion: 4
@@ -2708,6 +2719,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 3
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &1107915186
 Rigidbody2D:
   serializedVersion: 4
@@ -3439,6 +3452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 9
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &1446917803
 Rigidbody2D:
   serializedVersion: 4
@@ -4550,6 +4565,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 8
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &1816940875
 Rigidbody2D:
   serializedVersion: 4
@@ -4823,6 +4840,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 5
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &1921489615
 Rigidbody2D:
   serializedVersion: 4
@@ -5248,6 +5267,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 1
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &1981189446
 Rigidbody2D:
   serializedVersion: 4
@@ -5467,6 +5488,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 4
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &2017989834
 Rigidbody2D:
   serializedVersion: 4

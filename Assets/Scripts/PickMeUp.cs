@@ -19,7 +19,7 @@ public class PickMeUp : MonoBehaviour {
 
     /*Plug Choice Mechanics*/
 	public Collider2D plugCollider;
-	private bool overPlug;
+	public bool overPlug;
 	public int plugNum;
     public bool pluggedIn = false;
 
@@ -65,7 +65,7 @@ public class PickMeUp : MonoBehaviour {
             if (correctConnection && lightTimer > -10)
             {//If connection is right and the lightTimer has started
                 lightScore += 10;	//Score + 10
-                if (mainCam.GetComponent<GameStuff>().specificBool && plugCollider.GetComponent<Number>().Num == mainCam.GetComponent<Morals>().correctPlug)
+                if (mainCam.GetComponent<GameStuff>().specificBool && plugCollider.GetComponent<Plug>().Num == mainCam.GetComponent<Morals>().correctPlug)
                 {//If it's the specificCall and the plug is the correct plug
                     if (mainCam.GetComponent<Morals>().level == 2)
                     {//If this is level 2, then the police have been contacted
@@ -128,9 +128,9 @@ public class PickMeUp : MonoBehaviour {
 
             var lights = GameObject.FindGameObjectsWithTag("light");			//Create an array of lights
             foreach (GameObject light in lights)								//For each element in the array of lights
-                light.GetComponent<lightUp>().OnCall(plugCollider.GetComponent<Number>().Num);	//If it's the correct light, turn it on.
+                light.GetComponent<lightUp>().OnCall(plugCollider.GetComponent<Plug>().Num);	//If it's the correct light, turn it on.
 
-			if ((plugCollider.GetComponent<Number>().Num == mainCam.GetComponent<GameStuff>().randPlug + 1) && (mainCam.GetComponent<GameStuff>().callNumber) != callerID)
+			if ((plugCollider.GetComponent<Plug>().Num == mainCam.GetComponent<GameStuff>().randPlug + 1) && (mainCam.GetComponent<GameStuff>().callNumber) != callerID)
 			{//If the plug's number is the same as the caller's random plug + 1, AND the current call number is not the caller ID
                 happyScore += (int)mainCam.GetComponent<GameStuff>().happyTimer;//accumulate happyScore
                 mainCam.GetComponent<GameStuff>().customersServed++;			//increment customer counter
@@ -138,13 +138,14 @@ public class PickMeUp : MonoBehaviour {
                 correctConnection = true;										//This IS the correct connection
 				callerID = mainCam.GetComponent<GameStuff> ().callNumber;		//ID = current call number
             }
-			else if (plugCollider.GetComponent<Number>().Num != (mainCam.GetComponent<GameStuff>().randPlug + 1))
+			else if (plugCollider.GetComponent<Plug>().Num != (mainCam.GetComponent<GameStuff>().randPlug + 1))
             {//If the plug's number isn't the caller's random plug number + 1
 				lightTimer = 2;													//Start unhappy light timer (light stays for 2 seconds)
                 correctConnection = false;										//This IS NOT the correct connection
 				happyScore -= 2;												//decrement happyScore								
             }
             pluggedIn = true; // cord is plugged in
+            plugCollider.GetComponent<Plug>().cordPlugged = true;
         }
     }
 
@@ -153,8 +154,11 @@ public class PickMeUp : MonoBehaviour {
     {
         if (collision.gameObject.CompareTag("Plug"))	//If the cord enters a plug's collider and is not in a cord's collider
         {
-            plugCollider = collision;					//plugCollider is the current collider it is over
-            overPlug = true;							//The cord is now over a plug
+            if (collision.gameObject.GetComponent<Plug>().cordPlugged == false)
+            {
+                plugCollider = collision;                   //plugCollider is the current collider it is over
+                overPlug = true;                            //The cord is now over a plug
+            }
         }
     }
 
@@ -168,6 +172,7 @@ public class PickMeUp : MonoBehaviour {
                 overPlug = false;                           //It is no longer over the plug
                 LightsOut();                                //Turn off its respective light, if it is on
                 pluggedIn = false;
+                collision.gameObject.GetComponent<Plug>().cordPlugged = false;
             }
         }
     }
@@ -178,7 +183,7 @@ public class PickMeUp : MonoBehaviour {
 		var lights = GameObject.FindGameObjectsWithTag("light");
 		foreach (GameObject light in lights)
 		{//Checks all lights and turns them off ONLY if they're equal to the current plug collider's number
-			if(light.GetComponent<lightUp>().lightNumber == plugCollider.GetComponent<Number>().Num){
+			if(light.GetComponent<lightUp>().lightNumber == plugCollider.GetComponent<Plug>().Num){
 				light.GetComponent<lightUp>().Interrupted();
 
 				/*Still turns it off while dragging one cord over another cord's current plug, SHOULD FIX LATER*/

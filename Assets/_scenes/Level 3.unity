@@ -160,6 +160,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 1
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &18742771
 Rigidbody2D:
   serializedVersion: 4
@@ -555,6 +557,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 2
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &295883343
 Rigidbody2D:
   serializedVersion: 4
@@ -908,6 +912,11 @@ Prefab:
     - target: {fileID: 1930980823164964, guid: 3d14808c70dd6cb459a9bf58d2da3a1a, type: 2}
       propertyPath: m_Name
       value: cord 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 50200585846170792, guid: 3d14808c70dd6cb459a9bf58d2da3a1a,
+        type: 2}
+      propertyPath: m_BodyType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 58135368331346430, guid: 3d14808c70dd6cb459a9bf58d2da3a1a, type: 2}
@@ -1438,6 +1447,11 @@ Prefab:
       propertyPath: m_Name
       value: cord 1
       objectReference: {fileID: 0}
+    - target: {fileID: 50200585846170792, guid: 3d14808c70dd6cb459a9bf58d2da3a1a,
+        type: 2}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 58135368331346430, guid: 3d14808c70dd6cb459a9bf58d2da3a1a, type: 2}
     - {fileID: 70637024921663898, guid: 3d14808c70dd6cb459a9bf58d2da3a1a, type: 2}
@@ -1490,6 +1504,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 4
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &519860788
 Rigidbody2D:
   serializedVersion: 4
@@ -2108,6 +2124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 6
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &712203179
 Rigidbody2D:
   serializedVersion: 4
@@ -2451,6 +2469,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 3
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &895859538
 Rigidbody2D:
   serializedVersion: 4
@@ -3122,6 +3142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 10
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &1134446777
 Rigidbody2D:
   serializedVersion: 4
@@ -3746,6 +3768,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 8
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &1370647233
 Rigidbody2D:
   serializedVersion: 4
@@ -4833,6 +4857,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 9
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &1749238947
 Rigidbody2D:
   serializedVersion: 4
@@ -5381,6 +5407,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 5
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &1926331237
 Rigidbody2D:
   serializedVersion: 4
