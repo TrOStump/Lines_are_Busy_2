@@ -22,4 +22,8 @@ public class SceneSelector : MonoBehaviour {
 		PlayerPrefs.SetInt ("Next Level", nextLevel);	//Next Level PLayerPref set
 		SceneManager.LoadScene ("Level " + nextLevel);	//Load the next level
     }
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

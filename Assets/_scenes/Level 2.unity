@@ -452,6 +452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 1
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &128071609
 Rigidbody2D:
   serializedVersion: 4
@@ -891,6 +893,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 6
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &406000191
 Rigidbody2D:
   serializedVersion: 4
@@ -1054,6 +1058,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 3
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &435074498
 Rigidbody2D:
   serializedVersion: 4
@@ -1183,6 +1189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 10
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &458194197
 Rigidbody2D:
   serializedVersion: 4
@@ -1619,6 +1627,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 4
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &634273629
 Rigidbody2D:
   serializedVersion: 4
@@ -1933,6 +1943,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 2
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &691115082
 Rigidbody2D:
   serializedVersion: 4
@@ -2699,7 +2711,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4089c1accce47a94b88ebe8736688b22, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3309,6 +3321,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 8
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &1348888759
 Rigidbody2D:
   serializedVersion: 4
@@ -5094,6 +5108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 5
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &2007938725
 Rigidbody2D:
   serializedVersion: 4
@@ -5407,6 +5423,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 9
+  cordCollider: {fileID: 0}
+  cordPlugged: 0
 --- !u!50 &2097950022
 Rigidbody2D:
   serializedVersion: 4
