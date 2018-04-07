@@ -2663,7 +2663,7 @@ MonoBehaviour:
   - 'Aye, operator, please connect me to '
   - 'How do I work this? What? It''s on? Oh. Uh. Operator, can you connect me to the...
     Where? To '
-  - '.............................................'
+  - '............................................. '
   - 'Operator, '
   - 'Statistics show that if you''re seeing this message you either cheated or played
     wrong. Connect me to '
@@ -2685,7 +2685,7 @@ MonoBehaviour:
   - the Agatha Theatre?
   - Vito's Talent Agency?
   - Salvadore's Taylor Shop?
-  - Finch and son Lawfirm?
+  - Finch and Son Lawfirm?
   - Big City Bakery?
   - the General Hospital?
   - Greatville Elementary?
@@ -2711,7 +2711,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4089c1accce47a94b88ebe8736688b22, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
   Mute: 0

@@ -16,14 +16,16 @@ public class SceneSelector : MonoBehaviour {
     {
         if (currentLevel.name == "Menu") //If the current scene is the menu
             nextLevel = 1;					//The next level is Level 1
-        else if (nextLevel <= 3)
-            SceneManager.LoadScene("end");
+		else if (currentLevel.name == "end")
+			nextLevel = -1;
         else//Otherwise, the next level is whatever the PlayerPrefs says it is
             nextLevel = PlayerPrefs.GetInt("Next Level");
 
 		PlayerPrefs.SetInt ("Next Level", nextLevel);	//Next Level PLayerPref set
 		if (nextLevel > 3)
-			SceneManager.LoadScene ();					//Load end screen
+			SceneManager.LoadScene ("end");					//Load end screen
+		else if (nextLevel == -1)
+			SceneManager.LoadScene ("Menu");
 		else
 			SceneManager.LoadScene ("Level " + nextLevel);	//Load the next level
     }

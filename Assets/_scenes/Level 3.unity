@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 41215684}
   - component: {fileID: 41215683}
   - component: {fileID: 41215682}
+  - component: {fileID: 41215685}
   m_Layer: 0
   m_Name: Cup
   m_TagString: Untagged
@@ -272,6 +273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ed5679970104cce97ac00edb723f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moving: 0
+  moved: 0
+  random: 0
   cupMove: {fileID: 8300000, guid: e12cbd5ababa94a859e2cbf3f94f9e20, type: 3}
 --- !u!212 &41215683
 SpriteRenderer:
@@ -324,12 +328,92 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 41215681}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.18, y: -1.53, z: -2}
+  m_LocalPosition: {x: 4.75, y: -1.5, z: -2}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &41215685
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 41215681}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0.332
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &155823625
 GameObject:
   m_ObjectHideFlags: 0
@@ -2953,12 +3037,13 @@ MonoBehaviour:
   - 'Aye, operator, please connect me to '
   - 'How do I work this? What? It''s on? Oh. Uh. Operator, can you connect me to the...
     Where? To '
-  - '.............................................'
+  - '............................................. '
   - 'Operator, '
-  - 
-  - 
-  - 
-  - 
+  - 'Yeah I uh, can you get me through to '
+  - 'Hello? Huh? Who is this? Is this '
+  - 'Wow, either you''re doing your job really well or you''re playing the game wrong!
+    Congrats on either end! Mind connecting me to '
+  - '. . . '
   - 
   - 
   - 
@@ -2984,7 +3069,7 @@ MonoBehaviour:
   - the Agatha Theatre?
   - Vito's Talent Agency?
   - Salvadore's Taylor Shop?
-  - Finch and son Lawfirm?
+  - Finch and Son Lawfirm?
   - Big City Bakery?
   - the General Hospital?
   - Greatville Elementary?
@@ -3010,7 +3095,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4089c1accce47a94b88ebe8736688b22, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
   Mute: 0
