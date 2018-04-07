@@ -20,7 +20,10 @@ public class SceneSelector : MonoBehaviour {
 			nextLevel = PlayerPrefs.GetInt ("Next Level");
 
 		PlayerPrefs.SetInt ("Next Level", nextLevel);	//Next Level PLayerPref set
-		SceneManager.LoadScene ("Level " + nextLevel);	//Load the next level
+		if (nextLevel > 3)
+			SceneManager.LoadScene ();					//Load end screen
+		else
+			SceneManager.LoadScene ("Level " + nextLevel);	//Load the next level
     }
     public void Quit()
     {
