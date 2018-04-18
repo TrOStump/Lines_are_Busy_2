@@ -505,7 +505,7 @@ MonoBehaviour:
   S: 0
   linguistics: 0
   button: {fileID: 1636243789}
-  phone: {fileID: 0}
+  phone: {fileID: 1584172587}
   cord: {fileID: 0}
   dialogue: {fileID: 1382792480}
   OpeningText:
@@ -1375,7 +1375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2407048de78acbc42b8e960196b16c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 0}
+  dialogue: {fileID: 1382792480}
   pickedUp: 0
 --- !u!212 &1584172591
 SpriteRenderer:
